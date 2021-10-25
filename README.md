@@ -23,3 +23,13 @@ las credenciales se encuentran en ./mercado/config/config.yml
 # Como correrlo 
 ir hasta el directorio ./Desafio/mercado/spiders
 correr el comando 'scrapy crawl mercado'
+
+# Como Correr la API
+ir hasta el directorio ./Telecentro/Desafio/Consulta
+ejecutar comando 'flask run'
+
+Las consultas generadas son:
+    *http://localhost:5000/precio/entre/<Valor1>/<Valor2>
+    *http://localhost:5000/precio/mayorque/<Valor>
+    *http://localhost:5000/precio/menorque/<Valor>
+    *http://localhost:5000/palabraclave/<PalabraClave>

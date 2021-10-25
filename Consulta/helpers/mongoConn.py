@@ -31,30 +31,25 @@ def creauri(): #Funcion que crea el string de conexion hacia Mongo
     
     
 
-def qryMongo():
+def qryMongo(PalCla):
     MONGO_URI =creauri()
     MONGODB = _get_config('database')
     MONGOCOL=_get_config('coleccion')
-
     conexion = pymongo.MongoClient(MONGO_URI)
-    print('lista database')
-    print(conexion.list_database_names())
     database = conexion[MONGODB]
-    print ('MONGODB')
-    print (MONGODB)
-    print('lista coleccion')
-    print(database.list_collection_names())
     coleccion = database[MONGOCOL]
-    print('MONGO COL')
-    print(MONGOCOL)
     #myquery = ({'modelo':{ '$regex': '^/s/' :'i'} })
-    myquery = ({'categoria':{'$regex' : 'cel', '$options' : 'i'}})
+    #myquery = ({'categoria':{'$regex' : PalCla, '$options' : 'i'}})
+    #myquery = ({'categoria':{'$regex' : PalCla,'$options' : 'i'}})
+    myquery = ({'$**': 'TCL'})
     mydoc = coleccion.find(myquery)
+
     print(myquery)
     for x in mydoc:
         print(x)
+    conexion.close()
 
-qryMongo()
+qryMongo('celu')
 
 
     
