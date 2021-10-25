@@ -16,7 +16,7 @@ import pymongo
 from itemadapter import ItemAdapter
 
 
-class MercadoPipeline(object):
+class MercadoPipeline(object): #Genera un export en csv
     def __init__(self):
         self.files = {}
 
@@ -31,8 +31,8 @@ class MercadoPipeline(object):
         file = open('%s_items.csv' % spider.name, 'w+b')
         self.files[spider] = file
         self.exporter = CsvItemExporter(file)
-        self.exporter.fields_to_export = ['web','titulo','modelo','marca','colour','tecnologia','tipo','precio','envio',
-        'ubicacion','opiniones','publicacion','vendedor','vendedor_url','tipo_vendedor','ventas_vendedor']
+        self.exporter.fields_to_export = ['categoria','web','titulo','modelo','marca','colour','tecnologia','tipo','precio','envio',
+        'ubicacion','opiniones','vendedor','vendedor_url','tipo_vendedor','ventas_vendedor']
         self.exporter.start_exporting()
 
     def spider_closed(self, spider):
@@ -46,7 +46,7 @@ class MercadoPipeline(object):
 
 
 
-class MercadoMongoPipeline:
+class MercadoMongoPipeline: #Carga los datos a Mongo
 
     collection_name = 'scrapMeli'
     print('entra a Mongo')

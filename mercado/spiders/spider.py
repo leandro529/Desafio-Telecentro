@@ -45,6 +45,7 @@ class MercadoSpider(CrawlSpider):
 		ml_item['tipo_vendedor'] = str(response.xpath('normalize-space(//p[@class="ui-seller-info__status-info__title ui-pdp-seller__status-title"]/text())').extract_first())
 		ml_item['ventas_vendedor'] = int(response.xpath('normalize-space(//strong[@class="ui-pdp-seller__sales-description"]/text())').extract_first())
 		
+		#Se limita la cantidad de solicitudes para evitar el baneo
 		self.item_count += 1
 		print(self.item_count)
 		if self.item_count > 60:

@@ -13,7 +13,7 @@ import os
 import yaml
 
 def _get_config(dato): #Funcion que busca los datos y credenciales.
-    configdir = str(pathlib.Path(__file__).parent.resolve()) + '/config/config.yml'
+    configdir = str(pathlib.Path(__file__).parent.resolve().parent.resolve()) + '/config/config.yml'
     if os.path.exists(configdir):
         config = yaml.safe_load( open( configdir))
         try:

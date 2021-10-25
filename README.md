@@ -16,3 +16,10 @@ https://github.com/luisramirez-m/mercadolibre-scrapy
 # Pagina ayuda con xpath
 
 https://www.scientecheasy.com/2019/08/xpath-axes.html/
+
+# Credenciales
+las credenciales se encuentran en ./mercado/config/config.yml
+
+# Como correrlo 
+ir hasta el directorio ./Desafio/mercado/spiders
+correr el comando 'scrapy crawl mercado'
