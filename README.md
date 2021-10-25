@@ -13,3 +13,6 @@ https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 # Referencia de codigo base
 https://github.com/luisramirez-m/mercadolibre-scrapy
 
+# Pagina ayuda con xpath
+
+https://www.scientecheasy.com/2019/08/xpath-axes.html/
