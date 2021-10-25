@@ -28,7 +28,7 @@ def _get_config(dato): #Funcion que busca los datos y credenciales.
 
 
 def creauri(): #Funcion que crea el string de conexion hacia Mongo
-	uri='mongodb+srv://'+_get_config('user')+':'+_get_config('pwd')+'@'+_get_config('database')+'.k4pj0.mongodb.net/'+_get_config('coleccion')+'?retryWrites=true&w=majority'
+	uri='mongodb+srv://'+_get_config('user')+':'+_get_config('pwd')+'@'+_get_config('proyecto')+'.k4pj0.mongodb.net/'+_get_config('coleccion')+'?retryWrites=true&w=majority'
 	return uri
 
 #print(creauri())

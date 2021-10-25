@@ -1,5 +1,6 @@
 user: 'DesafioTele'
 pwd: 'Tele123Tele'
 host: 'k4pj0.mongodb.net'
+proyecto : 'DesafioTele'
 coleccion: 'scrapMeli'
-database: 'DesafioTele'
+database: 'scrapMeli'

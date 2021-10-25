@@ -62,7 +62,7 @@ class MercadoMongoPipeline: #Carga los datos a Mongo
         return cls(
 
             mongo_uri=crawler.settings.get('MONGO_URI'),
-            mongo_db=crawler.settings.get('MONGO_DATABASE', 'srapMeli')#'items')
+            mongo_db=crawler.settings.get('MONGO_DATABASE', 'scrapMeli')#'items')
 
         )
 
