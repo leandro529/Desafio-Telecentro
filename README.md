@@ -33,3 +33,8 @@ Las consultas generadas son:
     *http://localhost:5000/precio/mayorque/<Valor>
     *http://localhost:5000/precio/menorque/<Valor>
     *http://localhost:5000/palabraclave/<PalabraClave>
+    *http://localhost:5000/Categoria/contiene/<Clave>
+    *http://localhost:5000/Categoria/exacta/<Clave>"
+    
+Referencia API: https://flask.palletsprojects.com/en/2.0.x/
+Referencia Consultas Mongo: https://docs.mongodb.com/manual/

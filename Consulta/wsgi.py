@@ -32,22 +32,64 @@ def creauri(): #Funcion que crea el string de conexion hacia Mongo
         print('fallo en los datos de credenciales')
         raise
 
-def qryMongo(qry):
+def qryMongo(qry, index=False):
     MONGO_URI =creauri()
     MONGODB = _get_config('database')
     MONGOCOL=_get_config('coleccion')
     conexion = pymongo.MongoClient(MONGO_URI)
     database = conexion[MONGODB]
     coleccion = database[MONGOCOL]
+    if index:
+        coleccion.create_index([('$**', 'text')])
     myquery = (qry)
     #myquery = ({'categoria':{'$regex' : PalCla, '$options' : 'i'}})
     mydoc = coleccion.find(myquery)
     #print(myquery)
     #for x in mydoc:
     #    print(x)
+
+
     conexion.close()
     return mydoc
 
+
+@app.route("/Categoria/contiene/<Clave>")
+def categoriaContiene(Clave):
+    qry = ({'categoria': {'$regex' : Clave, '$options' : 'i'}})
+    _datos = qryMongo(qry)
+    data = []
+    b=0
+    for x in _datos:
+        b =+1
+        item = {
+            "_id" : str(x['_id']) ,
+            "categoria Primera": x['categoria'][0],
+            "categoria Segunda": x['categoria'][1],
+            "web": x['web'],
+            "titulo": x['titulo'],
+            "modelo": x['modelo'],
+            "marca": x['marca'],
+            "color": x['colour'],
+            "tecnologia": x['tecnologia'],
+            "tipo": x['tipo'],
+            "precio": x['precio'],
+            "envio": x['envio'],
+            "ubicacion": x['ubicacion'],
+            "opiniones": x['opiniones'],
+            "vendedor": x['vendedor'],
+            "vendedor_url": x['vendedor_url'],
+            "tipo_vendedor": x['tipo_vendedor'],
+            "ventas_vendedor": x['ventas_vendedor']
+            }
+
+        print(item)
+        data.append(item)
+        print(data)
+    
+    if b>0:
+        return jsonify(data=data), 200
+    else: 
+        return '<p>LA CONSULTA NO ARROJO NINGUN RESULTADO PARA LA CATEGORIA {}</p>'.format(Clave)
 
 @app.route("/Categoria/exacta/<Clave>")
 def categoriaExacta(Clave):
@@ -89,8 +131,9 @@ def categoriaExacta(Clave):
 
 
 @app.route("/palabraclave/<Clave>")
-def palabraClave(Clave):
-    qry = ({'categoria':{'$regex' : Clave, '$options' : 'i'}})
+def palabraClave(Clave, index=True):
+    qry = ({ '$text' : { '$search': Clave, '$caseSensitive': False } })
+    
     _datos = qryMongo(qry)
     data = []
     b=0
