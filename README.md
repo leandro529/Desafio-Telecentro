@@ -4,8 +4,8 @@ pymongo==3.12.1
 PyYAML==5.4.1
 requests 
 Scrapy==2.5.1
-seaborn @ file:///tmp/build/80754af9/seaborn_1608578541026/work
 xmltodict==0.12.0
+flask
 
 # Documentacion de la libreria
 https://doc.scrapy.org/en/latest/topics/item-pipeline.html

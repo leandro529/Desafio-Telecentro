@@ -13,7 +13,7 @@ class MercadoSpider(CrawlSpider):
 	name = 'mercado'
 	item_count = 0
 	allowed_domain = ['www.mercadolibre.com.mx']
-	start_urls = ['https://celulares.mercadolibre.com.ar/']
+	start_urls = ['https://listado.mercadolibre.com.ar/belleza-y-cuidado-personal/barberia/']
 
 	rules = {
 		# Para cada item
