@@ -1,0 +1,5 @@
+Para Escalar la solucion una mayor cantidad de registros lo haria de la siguiente forma.
+    -Generaria una estrategia de dividir los datos a scrapear en las distintas categorias las cuales se pueden sacar con Categorias.py
+    -En base a eso usaria un orquestador como Airflow para correr consultas aisladas por categoria en cada recurso disponible cuando el recurso se libere
+    siga con la categoria siguiente en el indice el cual tendra un indicador de si el proceso fue exitoso o fallido para el control del proceso.
+    Esto funcionaria como balanceador de carga en los recursos y agilizaria la carga, tomando las precauciones para no ser baneados.
