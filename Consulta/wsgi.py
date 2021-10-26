@@ -13,7 +13,6 @@ def _get_config(dato): #Funcion que busca los datos y credenciales.
         config = yaml.safe_load( open( configdir))
         try:
             data = config[dato]
-            
         except KeyError:
             print('Tipo, item o dato no existe en el archivo de configuracion: {}'.format(dato))
             return False
@@ -21,7 +20,6 @@ def _get_config(dato): #Funcion que busca los datos y credenciales.
     else:
         print('File {} not exist'.format(configdir))
         return False
-
 
 def creauri(): #Funcion que crea el string de conexion hacia Mongo
     try:
@@ -40,18 +38,14 @@ def qryMongo(qry, index=False):
     database = conexion[MONGODB]
     coleccion = database[MONGOCOL]
     if index:
-        coleccion.create_index([('$**', 'text')])
+        coleccion.create_index([('$**', 'text')]) # Se Genera un indice con todos los valores de texto.
     myquery = (qry)
-    #myquery = ({'categoria':{'$regex' : PalCla, '$options' : 'i'}})
     mydoc = coleccion.find(myquery)
-    #print(myquery)
-    #for x in mydoc:
-    #    print(x)
+ 
 
 
     conexion.close()
     return mydoc
-
 
 @app.route("/Categoria/contiene/<Clave>")
 def categoriaContiene(Clave):
@@ -129,7 +123,6 @@ def categoriaExacta(Clave):
     else: 
         return '<p>LA CONSULTA NO ARROJO NINGUN RESULTADO PARA LA CATEGORIA {}</p>'.format(Clave)
 
-
 @app.route("/palabraclave/<Clave>")
 def palabraClave(Clave, index=True):
     qry = ({ '$text' : { '$search': Clave, '$caseSensitive': False } })
@@ -169,8 +162,6 @@ def palabraClave(Clave, index=True):
     else: 
         return '<p>LA CONSULTA NO ARROJO NINGUN RESULTADO CON LA PALABRA CLAVE {}</p>'.format(Clave)
 
-
-
 @app.route("/precio/menorque/<Clave>")
 def precioMenor(Clave):
     qry = ({'categoria':{'$lt' : Clave}})
@@ -209,7 +200,6 @@ def precioMenor(Clave):
     else: 
         return '<p>LA CONSULTA NO ARROJO NINGUN RESULTADO MENOR QUE {}</p>'.format(Clave), 200
 
-
 @app.route("/precio/mayorque/<Clave>")
 def precioMayor(Clave):
     qry = ({'precio':{'$gt' : int(Clave)}})
@@ -246,7 +236,6 @@ def precioMayor(Clave):
         return jsonify(data=data), 200
     else: 
         return '<p>LA CONSULTA NO ARROJO NINGUN RESULTADO MAYOR QUE {}</p>'.format(Clave)
-
 
 @app.route("/precio/entre/<Clave>/<Clave1>")
 def precioEntre(Clave,Clave1):

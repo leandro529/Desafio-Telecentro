@@ -8,9 +8,7 @@
 import scrapy
 
 
-class MercadoItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
+class MercadoItem(scrapy.Item):#Se Definen los items a Scrapear
     categoria=scrapy.Field()
     web= scrapy.Field()
     titulo= scrapy.Field()
@@ -24,7 +22,6 @@ class MercadoItem(scrapy.Item):
     ubicacion= scrapy.Field()
     opiniones= scrapy.Field()
     publicacion= scrapy.Field()
-    #info de la tienda o vendedor
     vendedor= scrapy.Field()
     vendedor_url= scrapy.Field()
     tipo_vendedor= scrapy.Field()

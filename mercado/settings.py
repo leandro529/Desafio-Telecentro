@@ -12,7 +12,7 @@ import pathlib
 import os
 import yaml
 
-def _get_config(dato): #Funcion que busca los datos y credenciales.
+def _get_config(dato): #Funcion que busca los datos de conexion y credenciales.
     configdir = str(pathlib.Path(__file__).parent.resolve().parent.resolve()) + '/config/config.yml'
     if os.path.exists(configdir):
         config = yaml.safe_load( open( configdir))
@@ -31,21 +31,20 @@ def creauri(): #Funcion que crea el string de conexion hacia Mongo
 	uri='mongodb+srv://'+_get_config('user')+':'+_get_config('pwd')+'@'+_get_config('proyecto')+'.k4pj0.mongodb.net/'+_get_config('coleccion')+'?retryWrites=true&w=majority'
 	return uri
 
-#print(creauri())
 BOT_NAME = 'mercado'
 
 SPIDER_MODULES = ['mercado.spiders']
 NEWSPIDER_MODULE = 'mercado.spiders'
 
-#CSV IMPORTACION
-ITEM_PIPELINES ={'mercado.pipelines.MercadoMongoPipeline':600}#,'mercado.pipelines.MercadoPipeline': 500 }
-
+#Declaracion de Pipelines con prioridad.
+ITEM_PIPELINES ={'mercado.pipelines.MercadoMongoPipeline':600}
+#ITEM_PIPELINES ={'mercado.pipelines.MercadoPipeline': 500 } Funcion para debuguear con csv
 MONGO_URI =creauri()
 MONGODB = _get_config('database')
 # print(MONGO_URI)
 # print(MONGODB)
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'mercado (+http://www.yourdomain.com)'
+USER_AGENT = 'mercado (+http://www.yourdomain.com)'# Se declara Agente para no tener inconvenientes si tienen restriccion de rastreo.
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True

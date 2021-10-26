@@ -6,7 +6,7 @@ import json
 import os
 import pymongo
 
-#from DatabaseConn.mongocon import _getConf
+#Funcion por la cual se genera un listado de categorias actualizado de la pagina de ML, para poder realizar el Scrap en todo el Sitio.
 
 def urlCat():
     url='https://www.mercadolibre.com.ar/categorias#menu=categories'

@@ -13,16 +13,16 @@ class MercadoSpider(CrawlSpider):
 	name = 'mercado'
 	item_count = 0
 	allowed_domain = ['www.mercadolibre.com.mx']
-	start_urls = ['https://listado.mercadolibre.com.ar/belleza-y-cuidado-personal/barberia/']
+	start_urls = ['https://listado.mercadolibre.com.ar/belleza-y-cuidado-personal/barberia/'] #Urls en las cuales se realizara el Srap el listado completo se puede extraer de listCat
 
 	rules = {
-		# Para cada item
+		# Reglas de uso y selectores de links a entrar
 		Rule(LinkExtractor(allow = (), restrict_xpaths = ('//li[@class="andes-pagination__button andes-pagination__button--next"]/a'))),
 		Rule(LinkExtractor(allow =(), restrict_xpaths = ('//div[@class="ui-search-result__image"]//a[@class="ui-search-link"]')),
 							callback = 'parse_item', follow = False)
 	}
 
-	def parse_item(self, response):
+	def parse_item(self, response): 
 		ml_item = MercadoItem()
 		#info de producto
 		# Cada elemento extrae desde el codigo los valores buscados por xpath, en el caso de las tablas se puede usar 
@@ -37,9 +37,8 @@ class MercadoSpider(CrawlSpider):
 		ml_item['tipo'] = response.xpath('//th[text() = "Tipo"]/following-sibling::td/span/text()').extract_first()
 		ml_item['precio'] = int(response.xpath('normalize-space(//span[@class="price-tag-fraction"]/text())').extract_first().replace('.',''))
 		ml_item['envio'] = str(response.xpath('normalize-space(//p[contains(@id, "DEFAULT_SELF_SERVICE_ZONES")]/text())').extract_first())
-		ml_item['ubicacion'] = str(response.xpath('normalize-space(//p[contains(text(),"Ubicación")]//following-sibling::p)').extract_first()) #//p[contains(text(),"Ubicación")]//following-sibling::p
+		ml_item['ubicacion'] = str(response.xpath('normalize-space(//p[contains(text(),"Ubicación")]//following-sibling::p)').extract_first())
 		ml_item['opiniones'] = str(response.xpath('normalize-space(//p[@class="ui-pdp-reviews__rating__summary__average"]/text())').extract_first())
-		#info de la tienda o vendedor
 		ml_item['vendedor'] = str(response.xpath('normalize-space(//div[@class="ui-pdp-seller__header__title"]/text())').extract_first())
 		ml_item['vendedor_url'] = str(response.xpath('//a[@class="carousel__link--view-more"]/@href').extract_first())
 		ml_item['tipo_vendedor'] = str(response.xpath('normalize-space(//p[@class="ui-seller-info__status-info__title ui-pdp-seller__status-title"]/text())').extract_first())
